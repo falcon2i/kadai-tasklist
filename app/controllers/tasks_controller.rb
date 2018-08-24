@@ -3,13 +3,13 @@ class TasksController < ApplicationController
   before_action :correct_user, only: [:destroy]
   
   def create
-    @task = Task.new(task_params)
-
+    @task = current_user.tasks.build(task_params)
     if @task.save
-      flash[:success] = 'タスクを投稿しました'
+      flash[:success] = 'タスクを投稿しました。'
       redirect_to root_url
     else
-      flash.now[:danger] = 'タスクの投稿に失敗しました'
+      @tasks = current_user.tasks.order('created_at DESC').page(params[:page])
+      flash.now[:danger] = 'タスクの投稿に失敗しました。'
       render 'toppages/index'
     end
   end
