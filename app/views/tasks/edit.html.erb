@@ -1,34 +1,3 @@
-<h1>id = <%= @task.id %> のタスクの詳細ページ</h1>
-<% if logged_in? %>
-  <div class="row">
-    <aside class="col-md-4">
-      <%= form_for(@task) do |f| %>
-        <% if @task.errors.any? %>
-          <div id="error_explanation">
-            <ul>
-              <% @task.errors.full_messages.each do |task| %>
-                <li><%= task %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
-        <div class="form-group">
-          <p>タスク</p>
-          <%= f.text_area :content, class: 'form-control', rows: 5 %>
-        </div>
-        <div class="form-group">
-          <p>ステータス</p>
-          <%= f.text_area :status, class: 'form-control', rows: 5 %>
-        </div>
-        <%= f.submit 'Edit', class: 'btn btn-primary btn-block' %>
-      <% end %>
-    </aside>
-  </div>
-<% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to the Tasks</h1>
-      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
-    </div>
-  </div>
-<% end %>
+<h1>id: <%= @task.id %> のタスク編集ページ</h1>
+
+<%= render 'form', task: @task %>
